@@ -1,0 +1,6 @@
+github.com/Netflix/go-env v0.0.0-20220526054621-78278af1949d h1:wvStE9wLpws31NiWUx+38wny1msZ/tm+eL5xmm4Y7So=
+github.com/Netflix/go-env v0.0.0-20220526054621-78278af1949d/go.mod h1:9XMFaCeRyW7fC9XJOWQ+NdAv8VLG7ys7l3x4ozEGLUQ=
+github.com/golang-jwt/jwt/v5 v5.0.0-rc.2 h1:hXPcSazn8wKOfSb9y2m1bdgUMlDxVDarxh3lJVbC6JE=
+github.com/golang-jwt/jwt/v5 v5.0.0-rc.2/go.mod h1:pqrtFR0X4osieyHYxtmOUWsAWrfe1Q5UVIyoH402zdk=
+github.com/pemora/api01 v0.0.0-20230405171924-aeeca5f26376 h1:9nqtESMbZEbUrz+VmKjU+p3xCNSPQKUNQv7gJ2kXafI=
+github.com/pemora/api01 v0.0.0-20230405171924-aeeca5f26376/go.mod h1:6lGmU4M2MwrodvprUGPCPG5KMaz1ln01hY6PyrSTgpM=
