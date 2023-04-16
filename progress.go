@@ -1,6 +1,9 @@
 package dataextractor01
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"log"
+)
 
 type Skills struct {
 	MaxLevel int
@@ -89,7 +92,7 @@ var ProgressData string = `
 			"Problem Solving",
 			"Golang"
 		],
-		"name": "Hackathon"
+		"name": "Quest 10"
 	},
 	{
 		"maxLevel": 15,
@@ -126,9 +129,7 @@ var ProgressData string = `
 	{
 		"maxLevel": 8,
 		"skill": [
-			"Algorithms",
-			"Golang",
-			"Math"
+			"Golang"
 		],
 		"name": "Checkpoint 03"
 	},
@@ -140,11 +141,39 @@ var ProgressData string = `
 			"Math"
 		],
 		"name": "Checkpoint 04"
+	},
+	{
+		"maxLevel": 1,
+		"skill": [
+			"Problem Solving",
+			"Soft Skills"
+		],
+		"name": "quad"
+	},
+	{
+		"maxLevel": 1,
+		"skill": [
+			"Problem Solving",
+			"Soft Skills"
+		],
+		"name": "sudoku"
+	},
+	{
+		"maxLevel": 1,
+		"skill": [
+			"Problem Solving",
+			"Soft Skills"
+		],
+		"name": "quadchecker"
 	}
 ]`
 
 func getSkills() []Skills {
 	var skills []Skills
-	json.Unmarshal([]byte(ProgressData), &skills)
+	err := json.Unmarshal([]byte(ProgressData), &skills)
+	if err != nil {
+		log.Fatal(err)
+		// panic(err)
+	}
 	return skills
 }
