@@ -120,10 +120,10 @@ type Raids []struct {
 	}
 }
 
-func Init(client api01.Client) ([]Piscine, Raids) {
+func Init(client api01.Client, idUser int) ([]Piscine, Raids) {
 	var quest []Piscine
 	var raids Raids
-	resp := client.GraphqlQuery(PiscineQuery, api01.Vars{"userId": 792, "eventIds": []int{3}})
+	resp := client.GraphqlQuery(PiscineQuery, api01.Vars{"userId": idUser, "eventIds": []int{3}})
 
 	if resp.HasErrors() {
 		log.Fatal(resp.Errors)
@@ -193,13 +193,13 @@ func getAvatar(username string) string {
 	return data["avatar_url"].(string)
 }
 
-func ExtractData() (string, error) {
+func ExtractData(idUser int) (string, error) {
 	client, err := api01.NewClient(os.Getenv("ENDPOINT"))
 	if err != nil {
 		log.Fatal(err)
 		return "", err
 	}
-	quest, raids := Init(client)
+	quest, raids := Init(client, idUser)
 	// group by quest
 	type Quest struct {
 		Name  string
