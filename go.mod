@@ -5,7 +5,7 @@ go 1.19
 // github.com/Hamzaelkhatri/ImageBuilder/v2 v2.0.0-20230416071700-0e1ec5872656
 require github.com/pemora/api01 v0.0.0-20230405171924-aeeca5f26376
 
-require github.com/Hamzaelkhatri/ImageBuilder/v2 v2.0.0-20230416074328-a1c82b7f40ab
+require github.com/Hamzaelkhatri/ImageBuilder/v2 v2.0.0-20230417011312-c7c5e2b31e90
 
 require (
 	github.com/Netflix/go-env v0.0.0-20220526054621-78278af1949d // indirect

@@ -1,4 +1,4 @@
-package dataextractor01
+package DataExtractor01
 
 import (
 	"encoding/json"

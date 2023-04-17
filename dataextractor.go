@@ -1,4 +1,4 @@
-package dataextractor01
+package DataExtractor01
 
 import (
 	"encoding/json"
@@ -193,10 +193,11 @@ func getAvatar(username string) string {
 	return data["avatar_url"].(string)
 }
 
-func ExtractData() {
+func ExtractData() (string, error) {
 	client, err := api01.NewClient(os.Getenv("ENDPOINT"))
 	if err != nil {
 		log.Fatal(err)
+		return "", err
 	}
 	quest, raids := Init(client)
 	// group by quest
@@ -253,7 +254,7 @@ func ExtractData() {
 		xps += q.Amount
 	}
 
-	ImageBuilder.Init(
+	return ImageBuilder.Init(
 		ImageBuilder.CardData{
 			Name:              quest[0].UserLogin,
 			Avatar:            getAvatar(quest[0].UserLogin),
@@ -288,7 +289,7 @@ func ExtractData() {
 				},
 			},
 		},
-	)
+	), nil
 }
 
 func getLevel(xp float64) float64 {
