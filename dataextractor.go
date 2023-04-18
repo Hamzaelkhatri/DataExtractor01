@@ -2,6 +2,7 @@ package DataExtractor01
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -97,14 +98,14 @@ type Piscine struct {
 }
 
 type Raids []struct {
-	Level int
+	Level int `default:"0"`
 	Xp    struct {
-		Amount int
+		Amount int `default:"0"`
 	}
 	Event struct {
-		Status     string
+		Status     string `default:"incomplete"`
 		Progresses []struct {
-			Grade float32
+			Grade float32 `default:"0"`
 		}
 		GroupsAggregate struct {
 			Nodes []struct {
@@ -113,9 +114,9 @@ type Raids []struct {
 				}
 			}
 		} `json:"groups_aggregate"`
-		Path   string
+		Path   string `default:"raid"`
 		Object struct {
-			Name string
+			Name string `default:"raid"`
 		}
 	}
 }
@@ -143,7 +144,7 @@ func Init(client api01.Client, idUser int) ([]Piscine, Raids) {
 		log.Fatal(err)
 	}
 
-	resp = client.GraphqlQuery(RaidQuery, api01.Vars{"userid": 792})
+	resp = client.GraphqlQuery(RaidQuery, api01.Vars{"userid": idUser})
 	if resp.HasErrors() {
 		log.Fatal(resp.Errors)
 	}
@@ -253,30 +254,35 @@ func ExtractData(idUser int) (string, error) {
 	for _, q := range quest {
 		xps += q.Amount
 	}
+	if len(quest) == 0 {
+		return "", errors.New("error no data")
+	}
+	// log.Println(raids)
 
+	raidGenrated := func() []ImageBuilder.Raid {
+		var r []ImageBuilder.Raid
+		for _, raid := range raids {
+			r = append(r, ImageBuilder.Raid{
+				Name:   raid.Event.Object.Name,
+				Grade:  raid.Event.Progresses[0].Grade,
+				Status: raid.Event.Status,
+			})
+		}
+		return r
+	}
+	/*
+			Name   string
+		Status string
+		Grade  float32
+	*/
+	// var r Raids = nil
 	return ImageBuilder.Init(
 		ImageBuilder.CardData{
 			Name:              quest[0].UserLogin,
 			Avatar:            getAvatar(quest[0].UserLogin),
 			Level:             int(getLevel(float64(xps))),
 			NumberOfExercises: sumQuestExercises,
-			Raids: []ImageBuilder.Raid{
-				{
-					Name:   raids[0].Event.Object.Name,
-					Status: raids[0].Event.Status,
-					Grade:  raids[0].Event.Progresses[0].Grade,
-				},
-				{
-					Name:   raids[1].Event.Object.Name,
-					Status: raids[1].Event.Status,
-					Grade:  raids[1].Event.Progresses[0].Grade,
-				},
-				{
-					Name:   raids[2].Event.Object.Name,
-					Status: raids[2].Event.Status,
-					Grade:  raids[2].Event.Progresses[0].Grade,
-				},
-			},
+			Raids:             raidGenrated(),
 			Skills: [][]float32{
 				{
 					skillMap["Golang"].skill * 100,
