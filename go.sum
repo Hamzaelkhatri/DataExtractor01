@@ -1,9 +1,5 @@
-github.com/Hamzaelkhatri/ImageBuilder/v2 v2.0.0-20230417011312-c7c5e2b31e90 h1:x2Hlkd05Jyjjm1qNQ7uu5/5a26Y++6YLwmuANGd3gvc=
-github.com/Hamzaelkhatri/ImageBuilder/v2 v2.0.0-20230417011312-c7c5e2b31e90/go.mod h1:sIGIoMF+6ovu1ie8Jj1opZ5bIaigQXh5vu/YqhklVXs=
-github.com/Hamzaelkhatri/ImageBuilder/v2 v2.0.0-20230417230400-26fe83104b53 h1:l9pIooSa9xjO3XgTbQX84QMSlNY00kbmMecwzM1FaZE=
-github.com/Hamzaelkhatri/ImageBuilder/v2 v2.0.0-20230417230400-26fe83104b53/go.mod h1:sIGIoMF+6ovu1ie8Jj1opZ5bIaigQXh5vu/YqhklVXs=
-github.com/Hamzaelkhatri/ImageBuilder/v2 v2.1.1 h1:rFsnh5vTLln0EbZuoD2E7vR4hMG+mfM2782zgec2FDY=
-github.com/Hamzaelkhatri/ImageBuilder/v2 v2.1.1/go.mod h1:Ut4srEONPT8p6RAsuwXQBUgqjjs5fUAgUX4Etv7+5FM=
+github.com/Hamzaelkhatri/ImageBuilder/v2 v2.1.2 h1:1SEOeHErZczHGJ72HhDxd/F4q+JyFLhN4O0QLuZpp/8=
+github.com/Hamzaelkhatri/ImageBuilder/v2 v2.1.2/go.mod h1:Ut4srEONPT8p6RAsuwXQBUgqjjs5fUAgUX4Etv7+5FM=
 github.com/Netflix/go-env v0.0.0-20220526054621-78278af1949d h1:wvStE9wLpws31NiWUx+38wny1msZ/tm+eL5xmm4Y7So=
 github.com/Netflix/go-env v0.0.0-20220526054621-78278af1949d/go.mod h1:9XMFaCeRyW7fC9XJOWQ+NdAv8VLG7ys7l3x4ozEGLUQ=
 github.com/chromedp/cdproto v0.0.0-20230220211738-2b1ec77315c9/go.mod h1:GKljq0VrfU4D5yc+2qA6OVr8pmO/MBbPEWqWQ/oqGEs=

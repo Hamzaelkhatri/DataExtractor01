@@ -223,10 +223,13 @@ func ExtractData(idUser int) (string, error) {
 	}
 
 	sumQuestExercises := 0
+	sumCheckpointExercises := 0
 	regex := regexp.MustCompile(`^Quest.*`)
 	for _, q := range questMap {
 		if regex.MatchString(q.Name) {
 			sumQuestExercises += q.count
+		} else {
+			sumCheckpointExercises += q.count
 		}
 	}
 
@@ -258,7 +261,7 @@ func ExtractData(idUser int) (string, error) {
 		return "", errors.New("error no data")
 	}
 	// log.Println(raids)
-
+	raidsCounts := 0
 	raidGenrated := func() []ImageBuilder.Raid {
 		var r []ImageBuilder.Raid
 		for _, raid := range raids {
@@ -267,6 +270,9 @@ func ExtractData(idUser int) (string, error) {
 				Grade:  raid.Event.Progresses[0].Grade,
 				Status: raid.Event.Status,
 			})
+			if raid.Event.Progresses[0].Grade >= 1 {
+				raidsCounts++
+			}
 		}
 		return r
 	}
@@ -285,13 +291,8 @@ func ExtractData(idUser int) (string, error) {
 			Raids:             raidGenrated(),
 			Skills: [][]float32{
 				{
-					skillMap["Golang"].skill * 100,
-					skillMap["Problem Solving"].skill * 100,
-					skillMap["Soft Skills"].skill * 100,
-					skillMap["Unix"].skill * 100,
-					skillMap["Git"].skill * 100,
-					skillMap["Algorithms"].skill * 100,
-					skillMap["Math"].skill * 100,
+					float32(sumQuestExercises),
+					float32(sumCheckpointExercises), float32(raidsCounts),
 				},
 			},
 		},
