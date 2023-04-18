@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	base, err := dataextractor01.ExtractData(10)
+	base, err := dataextractor01.ExtractData(792)
 	if err != nil {
 		log.Println(err)
 		return
