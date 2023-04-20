@@ -5,9 +5,9 @@ go 1.19
 require github.com/pemora/api01 v0.0.0-20230405171924-aeeca5f26376
 
 require (
-	github.com/Hamzaelkhatri/ImageBuilder/v2 v2.1.2
+	github.com/Hamzaelkhatri/ImageBuilder/v2 v2.1.6
 	github.com/Netflix/go-env v0.0.0-20220526054621-78278af1949d // indirect
-	github.com/chromedp/cdproto v0.0.0-20230413093208-7497fc11fc57 // indirect
+	github.com/chromedp/cdproto v0.0.0-20230419194459-b5ff65bc57a3 // indirect
 	github.com/chromedp/chromedp v0.9.1 // indirect
 	github.com/chromedp/sysutil v1.0.0 // indirect
 	github.com/go-echarts/go-echarts/v2 v2.2.6 // indirect

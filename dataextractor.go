@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"sort"
 
 	"github.com/Hamzaelkhatri/ImageBuilder/v2"
 	"github.com/pemora/api01"
@@ -47,7 +48,7 @@ query Piscine($userId:Int!,$eventIds:[Int!]!){
 
 var RaidQuery = `
 query Raids($userid:Int!){
-	event_user(where:{user:{id:{_eq:$userid}},event:{object:{name:{_in:["quad","sudoku","quadchecker"]}}}}){
+	event_user(where:{user:{id:{_eq:$userid}},event:{object:{name:{_in:["quad","sudoku","quadchecker","Checkpoint 02","Checkpoint 01","Checkpoint 03","Final Checkpoint"]}}}}){
 		level
 		xp{
 			amount
@@ -67,6 +68,7 @@ query Raids($userid:Int!){
 		  path
 		  object{
 			name
+			type
 		  }
 		}
 	}
@@ -117,6 +119,7 @@ type Raids []struct {
 		Path   string `default:"raid"`
 		Object struct {
 			Name string `default:"raid"`
+			Type string `default:"raid"`
 		}
 	}
 }
@@ -270,25 +273,28 @@ func ExtractData(idUser int) (string, error) {
 				Grade:  raid.Event.Progresses[0].Grade,
 				Status: raid.Event.Status,
 			})
-			if raid.Event.Progresses[0].Grade >= 1 {
-				raidsCounts++
+			if raid.Event.Object.Type == "raid" {
+				if raid.Event.Progresses[0].Grade >= 1 {
+					raidsCounts++
+				}
 			}
 		}
 		return r
 	}
-	/*
-			Name   string
-		Status string
-		Grade  float32
-	*/
-	// var r Raids = nil
+	sortedRaid := make([]ImageBuilder.Raid, len(raidGenrated()))
+	raidsCounts = 0
+	copy(sortedRaid, raidGenrated())
+	sort.Slice(sortedRaid, func(i, j int) bool {
+		return sortedRaid[i].Name < sortedRaid[j].Name
+	})
+
 	return ImageBuilder.Init(
 		ImageBuilder.CardData{
 			Name:              quest[0].UserLogin,
 			Avatar:            getAvatar(quest[0].UserLogin),
-			Level:             int(getLevel(float64(xps))),
+			Level:             math.Floor(getLevel(float64(xps))*100) / 100,
 			NumberOfExercises: sumQuestExercises,
-			Raids:             raidGenrated(),
+			Raids:             sortedRaid,
 			Skills: [][]float32{
 				{
 					float32(sumQuestExercises),
