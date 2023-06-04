@@ -31,7 +31,6 @@ query Piscine($userId:Int!,$eventIds:[Int!]!){
 			paths{
 				path
 			}
-		  difficulty:attrs(path:"difficulty")
 		  parent{
 			questName:name
 			parents{
@@ -86,7 +85,7 @@ type Piscine struct {
 			Paths []struct {
 				Path string
 			}
-			Difficulty float32
+			// Difficulty int
 			Parent     struct {
 				QuestName string
 				Parents   []struct {
@@ -236,26 +235,26 @@ func ExtractData(idUser int) (string, error) {
 		}
 	}
 
-	skill := getSkills()
-	type Skill struct {
-		skill    float32
-		MaxLevel int
-		current  int
-	}
+	// skill := getSkills()
+	// type Skill struct {
+	// 	skill    float32
+	// 	MaxLevel int
+	// 	current  int
+	// }
 
-	skillMap := make(map[string]Skill)
-	for _, q := range questMap {
-		for _, s := range skill {
-			if s.Name == q.Name {
-				for _, d := range s.Skill {
-					skillMap[d] = Skill{skill: skillMap[d].skill + float32(float32(q.count)/float32(s.MaxLevel)), MaxLevel: s.MaxLevel, current: q.count}
-				}
-			}
-		}
-	}
-	for k, v := range skillMap {
-		skillMap[k] = Skill{skill: v.skill / float32(len(questMap)), MaxLevel: v.MaxLevel, current: v.current}
-	}
+	// skillMap := make(map[string]Skill)
+	// for _, q := range questMap {
+	// 	for _, s := range skill {
+	// 		if s.Name == q.Name {
+	// 			for _, d := range s.Skill {
+	// 				skillMap[d] = Skill{skill: skillMap[d].skill + float32(float32(q.count)/float32(s.MaxLevel)), MaxLevel: s.MaxLevel, current: q.count}
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// for k, v := range skillMap {
+	// 	skillMap[k] = Skill{skill: v.skill / float32(len(questMap)), MaxLevel: v.MaxLevel, current: v.current}
+	// }
 	xps := 0
 	for _, q := range quest {
 		xps += q.Amount
